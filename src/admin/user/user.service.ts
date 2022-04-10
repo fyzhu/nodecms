@@ -1,22 +1,20 @@
+import { EntityManager, EntityRepository, MikroORM } from '@mikro-orm/core';
+import { InjectRepository } from '@mikro-orm/nestjs';
 import { Injectable } from '@nestjs/common';
+import { User } from './user.entity';
 
 // This should be a real class/interface representing a user entity
-export type User = any;
+export type IUser = any;
 
 @Injectable()
 export class UserService {
-  private readonly users = [
-    {
-      userId: 1,
-      username: 'admin',
-      password: 'fy6174',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
-  ];
+  constructor(
+    private readonly orm: MikroORM,
+    private readonly em: EntityManager,
+    @InjectRepository(User)
+    private readonly userRepository: EntityRepository<User>,
+  ) {}
+
   login(): object {
     return {
       token: 12345,
@@ -34,7 +32,7 @@ export class UserService {
   logout(): string {
     return 'success';
   }
-  async findOne(username: string): Promise<User | undefined> {
-    return this.users.find((user) => user.username === username);
+  async findOne(username: string): Promise<IUser | undefined> {
+    return this.userRepository.findOne({ username });
   }
 }
