@@ -5,7 +5,6 @@ import { ConfigService, ConfigModule } from '@nestjs/config';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
 import { UserModule } from './admin/user/user.module';
 import { AuthModule } from './auth/auth.module';
 import envConfig from '../config/env';
@@ -35,7 +34,6 @@ import envConfig from '../config/env';
         // synchronize: true, //根据实体自动创建数据库表， 生产环境建议关闭
       }),
     }),
-    UsersModule,
     UserModule,
     AuthModule,
   ],
