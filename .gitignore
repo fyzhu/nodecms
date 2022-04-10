@@ -2,7 +2,8 @@
 /dist
 /public
 /node_modules
-
+.env*
+src/auth/constants.ts
 # Logs
 logs
 *.log
@@ -34,3 +35,4 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+src/auth/constants.ts
